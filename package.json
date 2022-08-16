@@ -1,0 +1,33 @@
+{
+  "name": "cotton",
+  "version": "1.0.0",
+  "description": "Cotton is webapp to assist house cleaners to do the state of art in its business management.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon api/v1/public/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flash-ITSC/cotton.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Flash-ITSC/cotton/issues"
+  },
+  "homepage": "https://github.com/Flash-ITSC/cotton#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chalk": "^5.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
+    "sequelize": "^6.21.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "sequelize-cli": "^6.4.1",
+    "sqlite3": "^5.0.11"
+  }
+}
