@@ -3,7 +3,7 @@ const token = require('../utils/token')
 
 exports.login = async (req, res, next) => {
     try {
-
+        console.log(req.headers)
         const client = req.body
 
         const anonymous = await database.query(`select * from vw_users_logins where email = "${client.email}"`)

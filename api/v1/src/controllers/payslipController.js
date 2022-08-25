@@ -1,6 +1,7 @@
 const database = require('../lib/database.js')
 
-exports.readAll = async(req, res, next)=>{
+exports.readAll = async (req, res, next)=>{
+    
     try {
         
         const app_payslip = await database.query(`select * from vw_payslips`)
@@ -21,7 +22,7 @@ exports.readAll = async(req, res, next)=>{
         )
 
     } catch (error) {
-        return next(error)
+        return next()
     }
 }
 

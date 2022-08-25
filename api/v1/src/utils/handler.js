@@ -1,10 +1,8 @@
-module.exports = (err, req, res) => {
-    
-    console.log('Error: ', err)
-    
+module.exports = async (req, res) => {
+
     return res.status(500).json(
         {
-            error: "Error. Check logs!"
+            error: 'Internal error'
         }
-    )
+    );
 }
