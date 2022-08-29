@@ -30,6 +30,10 @@ module.exports = {
           },
           allowNull: false
         },
+        tokens:{
+          type: Sequelize.TEXT,
+          allowNull: true
+        },
         status: {
           type: Sequelize.BOOLEAN,
           allowNull: false,

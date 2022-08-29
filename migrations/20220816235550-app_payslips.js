@@ -44,6 +44,11 @@ module.exports = {
           defaultValue: 0,
           allowNull: false
         },
+        employee_service_percentage: {
+          type: Sequelize.FLOAT,
+          defaultValue: 0.00,
+          allowNull: false
+        },
         employee_salary: {
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
