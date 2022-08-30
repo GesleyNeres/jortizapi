@@ -107,3 +107,11 @@ exports.readService = async(req, res, next)=>{
         return next(error)
     }
 }
+
+
+exports.create = async(req, res, next)=>{
+    console.log("Request: ", req.body)
+    return res.status(200).json({
+        message: "Payslip saved."
+    })
+}

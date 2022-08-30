@@ -13,6 +13,7 @@ module.exports = {
           employee_hours:40,
           employee_salary:13.45,
           employee_discounts:30.00,
+          employee_car_efficiency: 10,
           employee_miles_travelled: 120.00,
           employee_gas_cost:3.23,
           status: true
@@ -26,6 +27,7 @@ module.exports = {
           employee_hours: 44.00,
           employee_salary:14.55,
           employee_discounts: 31.50,
+          employee_car_efficiency: 10,
           employee_miles_travelled: 80,
           employee_gas_cost: 3.12,
           status: true
@@ -38,6 +40,7 @@ module.exports = {
           service_billing:2500.99,
           employee_hours:42.5,
           employee_salary: 17.50,
+          employee_car_efficiency: 10,
           employee_discounts: 10.50,
           employee_miles_travelled: 90.34,
           employee_gas_cost: 3.48,

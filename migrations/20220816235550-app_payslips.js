@@ -44,12 +44,12 @@ module.exports = {
           defaultValue: 0,
           allowNull: false
         },
-        employee_service_percentage: {
+        employee_salary: {
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
           allowNull: false
         },
-        employee_salary: {
+        employee_service_percentage: {
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
           allowNull: false
@@ -65,6 +65,11 @@ module.exports = {
           allowNull: false
         },
         employee_gas_cost:{
+          type: Sequelize.FLOAT,
+          defaultValue: 0.00,
+          allowNull: false
+        },
+        employee_car_efficiency:{
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
           allowNull: false

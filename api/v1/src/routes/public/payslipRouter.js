@@ -10,4 +10,6 @@ router.get('/payslips/clients/:name', controller.readClient)
 
 router.get('/payslips/services/:name', controller.readService)
 
+router.post('/payslips', controller.create)
+
 module.exports = router
