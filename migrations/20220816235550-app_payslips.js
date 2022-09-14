@@ -12,25 +12,25 @@ module.exports = {
         },
         employee: {
           type: Sequelize.UUID,
-          references:{
-            model:'app_employees',
-            key:'uuid'
+          references: {
+            model: 'app_employees',
+            key: 'uuid'
           },
           allowNull: false
         },
         client: {
           type: Sequelize.UUID,
-          references:{
-            model:'app_clients',
-            key:'uuid'
+          references: {
+            model: 'app_clients',
+            key: 'uuid'
           },
           allowNull: false
         },
         service: {
           type: Sequelize.UUID,
-          references:{
-            model:'app_services',
-            key:'uuid'
+          references: {
+            model: 'app_services',
+            key: 'uuid'
           },
           allowNull: false
         },
@@ -42,34 +42,49 @@ module.exports = {
         employee_hours: {
           type: Sequelize.FLOAT,
           defaultValue: 0,
-          allowNull: false
+          allowNull: true
         },
         employee_salary: {
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
-          allowNull: false
+          allowNull: true
         },
         employee_service_percentage: {
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
-          allowNull: false
+          allowNull: true
         },
         employee_discounts: {
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
-          allowNull: false
+          allowNull: true
         },
-        employee_miles_travelled:{
+        employee_discounts_description: {
+          type: Sequelize.STRING,
+          allowNull: true,
+          defaultValue: ''
+        },
+        employee_miles_travelled: {
+          type: Sequelize.FLOAT,
+          defaultValue: 0.00,
+          allowNull: true
+        },
+        employee_gas_cost: {
+          type: Sequelize.FLOAT,
+          defaultValue: 0.00,
+          allowNull: true
+        },
+        employee_car_efficiency: {
+          type: Sequelize.FLOAT,
+          defaultValue: 0.00,
+          allowNull: true
+        },
+        employee_gains: {
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
           allowNull: false
         },
-        employee_gas_cost:{
-          type: Sequelize.FLOAT,
-          defaultValue: 0.00,
-          allowNull: false
-        },
-        employee_car_efficiency:{
+        employer_gains: {
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
           allowNull: false

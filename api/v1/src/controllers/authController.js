@@ -3,11 +3,12 @@ const token = require('../utils/token')
 
 exports.login = async (req, res, next) => {
     try {
-        console.log(req.headers)
+        
         const client = req.body
 
         const anonymous = await database.query(`select * from vw_users_logins where email = "${client.email}"`)
 
+        console.log(anonymous)
 
         if (anonymous[0][0].email === client.email && anonymous[0][0].password === client.password) {
 
@@ -24,7 +25,7 @@ exports.login = async (req, res, next) => {
                     {
 
                         data: anonymous[0][0],
-                        token: jwt
+                        token: anonymous[0][0].tokens
 
                     }
                 )

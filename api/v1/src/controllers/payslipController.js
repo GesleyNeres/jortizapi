@@ -1,11 +1,17 @@
 const database = require('../lib/database.js')
+const PayslipModel = require('../models/payslipModel')
+const crypt = require('../utils/crypt')
 
-exports.readAll = async (req, res, next)=>{
+exports.readAll = async (req, res, next) => {
     
     try {
-        
-        const app_payslip = await database.query(`select * from vw_payslips`)
 
+        const app_payslip = await database.query('select * from vw_payslips')
+
+        app_payslip[0].forEach(element => {
+            element.client = crypt.decrypt(element.client)
+            element.employee = crypt.decrypt(element.employee)
+        })
 
         if (app_payslip[0]) {
             return res.status(200).json(
@@ -22,96 +28,31 @@ exports.readAll = async (req, res, next)=>{
         )
 
     } catch (error) {
-        return next()
+        return next(error)
     }
 }
 
-exports.readEmployee = async(req, res, next)=>{
+exports.create = async (req, res, next) => {
     try {
-                
-        const param = String(req.params.name).replace("+"," ")
+        const payslip = req.body
 
-        const app_payslip = await database.query(`select * from vw_payslips where employee = "${param}"`)
+        const response = await PayslipModel.create(payslip)
 
-
-        if (app_payslip[0][0]) {
-            return res.status(200).json(
+        if (response) {
+            return res.status(201).json(
                 {
-                    data: app_payslip[0][0]
+                    data: "Payslip created."
                 }
             )
         }
 
-        return res.status(404).json(
+        return res.status(200).json(
             {
-                error: "Payslip not found."
+                data: "Payslip could not be created."
             }
         )
 
     } catch (error) {
         return next(error)
     }
-}
-
-
-exports.readClient = async(req, res, next)=>{
-    try {
-                
-        const param = String(req.params.name).replace("+"," ")
-
-        const app_payslip = await database.query(`select * from vw_payslips where client = "${param}"`)
-
-
-        if (app_payslip[0][0]) {
-            return res.status(200).json(
-                {
-                    data: app_payslip[0][0]
-                }
-            )
-        }
-
-        return res.status(404).json(
-            {
-                error: "Payslip not found."
-            }
-        )
-
-    } catch (error) {
-        return next(error)
-    }
-}
-
-exports.readService = async(req, res, next)=>{
-    try {
-                
-        const param = String(req.params.name).replace("+"," ")
-
-        const app_payslip = await database.query(`select * from vw_payslips where service = "${param}"`)
-
-
-        if (app_payslip[0][0]) {
-            return res.status(200).json(
-                {
-                    data: app_payslip[0][0]
-                }
-            )
-        }
-
-        return res.status(404).json(
-            {
-                error: "Payslip not found."
-            }
-        )
-
-    } catch (error) {
-        return next(error)
-    }
-}
-
-
-exports.create = async(req, res, next)=>{
-    console.log("Request: ", req.body)
-    return res.status(200).json({
-        message: "Payslip saved."
-    })
 }

@@ -5,10 +5,9 @@ exports.sign = (data) => {
     return token
 }
 
-exports.verify = (token) => {
+exports.verify = (token) => { 
     jwt.verify(token, "abc123", function (err, decoded) {
         if(err) return false
         if(decoded) return true
-        
     })
 }

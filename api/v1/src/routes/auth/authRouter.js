@@ -7,4 +7,5 @@ router.post('/auth/login', controller.login)
 
 router.get('/auth/session', auth, controller.session)
 
+
 module.exports = router

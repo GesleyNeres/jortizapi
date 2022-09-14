@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('app_clients',
@@ -22,6 +21,11 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
           unique: true
+        },
+        cost:{
+          type: Sequelize.FLOAT,
+          allowNull: false,
+          defaultValue: 0.00
         },
         status: {
           type: Sequelize.BOOLEAN,

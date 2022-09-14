@@ -13,9 +13,12 @@ module.exports = {
           employee_hours:40,
           employee_salary:13.45,
           employee_discounts:30.00,
+          employee_discounts_description: 'Lorem Ipsum',
           employee_car_efficiency: 10,
           employee_miles_travelled: 120.00,
           employee_gas_cost:3.23,
+          employee_gains: 350,
+          employer_gains: 450,
           status: true
         },
         {
@@ -27,8 +30,11 @@ module.exports = {
           employee_hours: 44.00,
           employee_salary:14.55,
           employee_discounts: 31.50,
+          employee_discounts_description: 'Lorem Ipsum',
           employee_car_efficiency: 10,
           employee_miles_travelled: 80,
+          employee_gains: 350,
+          employer_gains: 450,
           employee_gas_cost: 3.12,
           status: true
         },
@@ -42,8 +48,11 @@ module.exports = {
           employee_salary: 17.50,
           employee_car_efficiency: 10,
           employee_discounts: 10.50,
+          employee_discounts_description: 'Lorem Ipsum',
           employee_miles_travelled: 90.34,
           employee_gas_cost: 3.48,
+          employee_gains: 350,
+          employer_gains: 450,
           status: true
         }
       ], {});

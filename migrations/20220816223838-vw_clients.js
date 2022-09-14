@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.sequelize.query(
       `
       CREATE VIEW vw_clients as 
-      select cli.uuid as "id", cli.name as "name", cli.email as "email", cli.phone as "phone", cli."updatedAt" as "update"
+      select cli.uuid as "id", cli.name as "name", cli.email as "email", cli.phone as "phone", cli.cost as "cost", cli."updatedAt" as "update"
  from app_clients as cli`
     );
   },
