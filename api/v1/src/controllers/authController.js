@@ -1,31 +1,37 @@
 const database = require('../lib/database.js')
 const token = require('../utils/token')
+const validator = require('../utils/validator')
+const {logger, loggerusr} = require('../utils/logger')
 
+// Do user login
 exports.login = async (req, res, next) => {
     try {
-        
-        const client = req.body
+
+        let client = {}
+
+        if (validator.isEmail(req.body.email)) {
+            client = req.body
+        }
 
         const anonymous = await database.query(`select * from vw_users_logins where email = "${client.email}"`)
-
-        console.log(anonymous)
 
         if (anonymous[0][0].email === client.email && anonymous[0][0].password === client.password) {
 
 
             const jwt = token.sign(anonymous[0][0])
 
+            anonymous[0][0].tokens = jwt
+
             const user_token = await database.query(`UPDATE app_users SET tokens = "${jwt}" where email ="${anonymous[0][0].email}"`)
 
             if (user_token) {
-
+                loggerusr.info(`User '${anonymous[0][0].email}' logged successfully. | '${__filename}' | '${req.token}'`)
                 delete anonymous[0][0].password
 
                 return res.status(200).json(
                     {
 
-                        data: anonymous[0][0],
-                        token: anonymous[0][0].tokens
+                        data: anonymous[0][0]
 
                     }
                 )
@@ -33,6 +39,7 @@ exports.login = async (req, res, next) => {
 
         }
 
+        loggerusr.info(`User '${anonymous[0][0].email}' tried to log without success. | '${__filename}' | '${req.token}'`)
         return res.status(401).json(
             {
                 error: "Please, check your credentials."
@@ -40,11 +47,12 @@ exports.login = async (req, res, next) => {
         )
 
     } catch (error) {
+        logger.error(`Application error for login as '${error}' | '${__filename}' | '${req.token}' `)
         return next(error)
     }
 }
 
-
+// Load user session
 exports.session = async (req, res, next) => {
 
     try {
@@ -53,10 +61,10 @@ exports.session = async (req, res, next) => {
 
         const anonymous = await database.query(`select * from vw_users_logins where tokens = "${client_token}"`)
         console.log(anonymous[0][0])
-        
+
         if (anonymous[0][0]) {
             delete anonymous[0][0].password
-
+            loggerusr.info(`User '${anonymous[0][0].email}' session loaded successfully. | '${__filename}' | '${req.token}'`)
             return res.status(200).json(
                 {
 
@@ -65,7 +73,7 @@ exports.session = async (req, res, next) => {
                 }
             )
         }
-
+        loggerusr.info(`User '${anonymous[0][0].email}' tried to load session without success. | '${__filename}' | '${req.token}'`)
         return res.status(401).json(
             {
 
@@ -75,6 +83,7 @@ exports.session = async (req, res, next) => {
         )
 
     } catch (error) {
+        logger.error(`Application error for session load as '${error}' | '${__filename}' | '${req.token}'`)
         return next(error)
     }
 }

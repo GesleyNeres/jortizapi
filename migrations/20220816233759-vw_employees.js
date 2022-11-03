@@ -6,7 +6,7 @@ module.exports = {
       `
       CREATE VIEW vw_employees as 
       select emp.uuid as "id", emp.name as "name", emp.phone as "phone", emp."updatedAt" as "update"
- from app_employees as emp`
+      from app_employees as emp`
     );
   },
 

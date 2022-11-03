@@ -5,5 +5,7 @@ const auth = require('../../middlewares/auth')
 
 router.get('/payslips', auth, controller.readAll)
 
+router.get('/payslips/report', auth, controller.readAllReport)
+
 
 module.exports = router

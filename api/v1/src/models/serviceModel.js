@@ -40,5 +40,4 @@ const ServiceModel = database.define('app_services',
         }
     }
 )
-
 module.exports = ServiceModel

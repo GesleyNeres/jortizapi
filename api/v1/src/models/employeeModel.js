@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const database = require("../lib/database");
+const crypt = require('../utils/crypt')
 
 const EmployeeModel = database.define('app_employees',
     {
@@ -35,6 +36,9 @@ const EmployeeModel = database.define('app_employees',
         }
     }
 )
-
+EmployeeModel.beforeCreate(function (model) {
+    model.name = crypt.encrypt(model.name)
+    model.phone = crypt.encrypt(model.phone)
+});
 
 module.exports = EmployeeModel

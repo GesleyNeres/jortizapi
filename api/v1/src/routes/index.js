@@ -4,6 +4,9 @@ const serviceRoutes = require('./public/serviceRouter')
 const employeeRoutes = require('./public/employeeRouter')
 const payslipRoutes = require('./public/payslipRouter')
 const authPayslipRoutes = require('./auth/payslipRouter')
+const authEmployeeRoutes = require('./auth/employeeRouter')
+const authClientRoutes = require('./auth/clientRouter')
+const authServiceRoutes = require('./auth/serviceRouter')
 
 module.exports = [
     authRoutes,
@@ -11,5 +14,8 @@ module.exports = [
     serviceRoutes,
     employeeRoutes,
     payslipRoutes,
-    authPayslipRoutes
+    authPayslipRoutes,
+    authEmployeeRoutes,
+    authClientRoutes,
+    authServiceRoutes
 ]

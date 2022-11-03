@@ -39,12 +39,12 @@ module.exports = {
           defaultValue: 0.00,
           allowNull: false
         },
-        employee_hours: {
+        employee_hours: {/* rename to employee_work_hours */
           type: Sequelize.FLOAT,
           defaultValue: 0,
           allowNull: true
         },
-        employee_salary: {
+        employee_salary: {/* rename to employee_salary_hour */
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
           allowNull: true
@@ -69,7 +69,7 @@ module.exports = {
           defaultValue: 0.00,
           allowNull: true
         },
-        employee_gas_cost: {
+        employee_gas_cost: {/* rename to employee_gas_price */
           type: Sequelize.FLOAT,
           defaultValue: 0.00,
           allowNull: true
@@ -89,10 +89,20 @@ module.exports = {
           defaultValue: 0.00,
           allowNull: false
         },
+        employee_tips:{
+          type: Sequelize.FLOAT,
+          defaultValue: 0.00,
+          allowNull: false
+        },
         status: {
           type: Sequelize.BOOLEAN,
           allowNull: false,
           defaultValue: false
+        },
+        reportedAt: {
+          type: Sequelize.DATE,
+          defaultValue: Date.now(),
+          allowNull: false
         },
         createdAt: {
           type: Sequelize.DATE,

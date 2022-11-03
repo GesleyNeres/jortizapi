@@ -20,23 +20,23 @@ const ClientModel = database.define('app_clients',
       allowNull: false,
       unique: true
     },
-    address:{
+    address: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    city:{
+    city: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    state:{
+    state: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    cost:{
+    cost: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    total_revenue:{
+    total_revenue: {
       type: Sequelize.STRING,
       allowNull: false
     },
@@ -45,7 +45,7 @@ const ClientModel = database.define('app_clients',
       allowNull: false,
       unique: true
     },
-    details:{
+    details: {
       type: Sequelize.STRING,
       allowNull: false
     },
@@ -66,5 +66,17 @@ const ClientModel = database.define('app_clients',
     }
   }
 )
+ClientModel.beforeCreate(function (model) {
+  console.log("Aquii")
+  model.name = crypt.encrypt(model.name),
+  model.phone = crypt.encrypt(model.phone),
+  model.address = crypt.encrypt(model.address),
+  model.city= crypt.encrypt(model.city),
+  model.state= crypt.encrypt(model.state),
+  model.cost=crypt.encrypt(parseFloat(model.cost).toFixed(2)),
+  model.total_revenue= crypt.encrypt(parseFloat(model.total_revenue).toFixed(2)),
+  model.email= crypt.encrypt(model.email),
+  model.details = crypt.encrypt(model.details)
+});
 
 module.exports = ClientModel
