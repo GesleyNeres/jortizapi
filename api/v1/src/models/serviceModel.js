@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const database = require("../lib/database");
+const crypt = require('../utils/crypt')
 
 const ServiceModel = database.define('app_services',
     {
@@ -30,14 +31,22 @@ const ServiceModel = database.define('app_services',
         },
         createdAt: {
             type: Sequelize.DATE,
-            defaultValue: Date.now(),
+            defaultValue: Sequelize.fn('now'),
             allowNull: false
         },
         updatedAt: {
             type: Sequelize.DATE,
-            defaultValue: Date.now(),
+            defaultValue: Sequelize.fn('now'),
             allowNull: false
         }
     }
 )
+
+ServiceModel.beforeCreate(function (model) {
+    model.name = crypt.encrypt(model.name),
+    model.description = crypt.encrypt(model.description),
+    model.price= crypt.encrypt(model.price)
+  });
+  
+
 module.exports = ServiceModel

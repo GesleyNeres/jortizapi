@@ -2,7 +2,7 @@ const database = require('../lib/database.js')
 const token = require('../utils/token')
 const validator = require('../utils/validator')
 const {logger, loggerusr} = require('../utils/logger')
-
+const crypt = require('../utils/crypt')
 // Do user login
 exports.login = async (req, res, next) => {
     try {
@@ -14,8 +14,13 @@ exports.login = async (req, res, next) => {
         }
 
         const anonymous = await database.query(`select * from vw_users_logins where email = "${client.email}"`)
+        
+        
+        anonymous[0].forEach(element => {
+            element.name = crypt.decrypt(element.name)
+        });
 
-        if (anonymous[0][0].email === client.email && anonymous[0][0].password === client.password) {
+        if (anonymous[0][0].email === client.email &&  crypt.compareHash(client.password,anonymous[0][0].password)) {
 
 
             const jwt = token.sign(anonymous[0][0])
@@ -38,7 +43,7 @@ exports.login = async (req, res, next) => {
             }
 
         }
-
+        
         loggerusr.info(`User '${anonymous[0][0].email}' tried to log without success. | '${__filename}' | '${req.token}'`)
         return res.status(401).json(
             {
@@ -60,7 +65,10 @@ exports.session = async (req, res, next) => {
         const client_token = String(req.headers.authorization).replace("Bearer ", "")
 
         const anonymous = await database.query(`select * from vw_users_logins where tokens = "${client_token}"`)
-        console.log(anonymous[0][0])
+        
+        anonymous[0].forEach(element => {
+            element.name = crypt.decrypt(element.name)
+        });
 
         if (anonymous[0][0]) {
             delete anonymous[0][0].password

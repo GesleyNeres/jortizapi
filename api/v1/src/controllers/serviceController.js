@@ -1,13 +1,18 @@
 const database = require('../lib/database.js')
 const {logger, loggerusr} = require('../utils/logger')
 const ServiceModel = require('../models/serviceModel')
+const crypt = require('../utils/crypt')
 
 // Load all services
 exports.readAll = async(req, res, next)=>{
     try {
         
         const app_services = await database.query(`select * from vw_services`)
-
+        
+        app_services[0].forEach(element => {
+            element.name = crypt.decrypt(element.name),
+            element.description= crypt.decrypt(element.description)
+        });
 
         if (app_services[0]) {
             loggerusr.info(`Services successfully loaded. | '${__filename}' | '${req.token}'`)
@@ -43,7 +48,7 @@ exports.create = async (req, res, next) => {
             loggerusr.info(`Service successfully created.`)
             return res.status(201).json(
                 {
-                    data: "Service created."
+                    data: response.uuid,
                 }
             )
         }

@@ -56,18 +56,18 @@ const ClientModel = database.define('app_clients',
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Date.now(),
+      defaultValue: Sequelize.fn('now'),
       allowNull: false
     },
     updatedAt: {
       type: Sequelize.DATE,
-      defaultValue: Date.now(),
+      defaultValue: Sequelize.fn('now'),
       allowNull: false
     }
   }
 )
+
 ClientModel.beforeCreate(function (model) {
-  console.log("Aquii")
   model.name = crypt.encrypt(model.name),
   model.phone = crypt.encrypt(model.phone),
   model.address = crypt.encrypt(model.address),

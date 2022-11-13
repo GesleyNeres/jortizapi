@@ -48,14 +48,14 @@ exports.create = async (req, res, next) => {
     try {
         
         const client = req.body
-
+        
         const response = await ClientModel.create(client)
 
         if (response) {
             loggerusr.info(`Client successfully created.`)
             return res.status(201).json(
                 {
-                    data: "Client created."
+                    data: response.uuid,
                 }
             )
         }

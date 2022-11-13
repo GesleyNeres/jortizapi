@@ -41,12 +41,12 @@ const PayslipModel = database.define('app_payslips',
       defaultValue: 0.00,
       allowNull: false
     },
-    employee_hours: {/* rename to employee_work_hours */
+    employee_work_hours: {
       type: Sequelize.FLOAT,
       defaultValue: 0,
       allowNull: true
     },
-    employee_salary: {/* rename to employee_salary_hour */
+    employee_salary_hours: {
       type: Sequelize.FLOAT,
       defaultValue: 0.00,
       allowNull: true
@@ -71,7 +71,7 @@ const PayslipModel = database.define('app_payslips',
       defaultValue: 0.00,
       allowNull: true
     },
-    employee_gas_cost: {/* rename to employee_gas_price */
+    employee_gas_price: {
       type: Sequelize.FLOAT,
       defaultValue: 0.00,
       allowNull: true
@@ -103,17 +103,17 @@ const PayslipModel = database.define('app_payslips',
     },
     reportedAt: {
       type: Sequelize.DATE,
-      defaultValue: Date.now(),
+      defaultValue: Sequelize.fn('now'),
       allowNull: false
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Date.now(),
+      defaultValue: Sequelize.fn('now'),
       allowNull: false
     },
     updatedAt: {
       type: Sequelize.DATE,
-      defaultValue: Date.now(),
+      defaultValue: Sequelize.fn('now'),
       allowNull: false
     }
   }
@@ -154,8 +154,19 @@ ClientModel.hasMany(PayslipModel,
     foreignKey: 'uuid'
   }
 )
-/* PayslipModel.beforeCreate(function (model) {
-    model.employer_gains = 6666
-}); */
+
+PayslipModel.beforeCreate(function (model) {
+  model.service_billing = crypt.encrypt(model.service_billing),
+  model.employee_work_hours = crypt.encrypt(model.employee_work_hours),
+  model.employee_salary_hours = crypt.encrypt(model.employee_salary_hours),
+  model.employee_discounts = crypt.encrypt(model.employee_discounts),
+  model.employee_discounts_description = crypt.encrypt(model.employee_discounts_description),
+  model.employee_car_efficiency = crypt.encrypt(model.employee_car_efficiency),
+  model.employee_miles_travelled = crypt.encrypt(model.employee_miles_travelled),
+  model.employee_gas_price = crypt.encrypt(model.employee_gas_price),
+  model.employee_gains = crypt.encrypt(model.employee_gains),
+  model.employer_gains = crypt.encrypt(model.employer_gains),
+  model.employee_tips = crypt.encrypt(model.employee_tips)
+});
 
 module.exports = PayslipModel

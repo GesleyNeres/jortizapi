@@ -1,14 +1,20 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const server = express()
 const routes = require('../routes/index')
 const handler = require('../utils/handler')
 const {logger} = require('../utils/logger')
 const crypt = require('../utils/crypt')
 
-const cors = require('cors')
 
-server.use(cors())
+
+server.use(cors(
+    {
+        origin: '*'
+    }
+))
+
 logger.info(`Server CORS started | '${__filename}'`)
 
 server.use(express.json())

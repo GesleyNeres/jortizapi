@@ -13,7 +13,19 @@ exports.readAll = async (req, res, next) => {
 
         app_payslip[0].forEach(element => {
             element.client = crypt.decrypt(element.client)
+            element.service = crypt.decrypt(element.service)
             element.employee = crypt.decrypt(element.employee)
+            element.service_billing = crypt.decrypt(element.service_billing),
+            element.employee_work_hours= crypt.decrypt(element.employee_work_hours),
+            element.employee_salary_hours = crypt.decrypt(element.employee_salary_hours),
+            element.employee_discounts= crypt.decrypt(element.employee_discounts),
+            element.employee_discounts_description = crypt.decrypt(element.employee_discounts_description),
+            element.employee_car_efficiency = crypt.decrypt(element.employee_car_efficiency),
+            element.employee_miles_travelled = crypt.decrypt(element.employee_miles_travelled),
+            element.employee_gas_price = crypt.decrypt(element.employee_gas_price),
+            element.employee_gains = crypt.decrypt(element.employee_gains),
+            element.employer_gains = crypt.decrypt(element.employer_gains),
+            element.employee_tips = crypt.decrypt(element.employee_tips)
         })
 
         if (app_payslip[0]) {
