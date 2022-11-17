@@ -20,9 +20,9 @@ const ServiceModel = database.define('app_services',
             unique: true
         },
         price: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.STRING,
             allowNull: false,
-            defaultValue: 0.00
+            defaultValue: '0.00'
         },
         status: {
             type: Sequelize.BOOLEAN,

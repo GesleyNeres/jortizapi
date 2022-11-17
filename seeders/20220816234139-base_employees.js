@@ -8,7 +8,7 @@ module.exports = {
     await queryInterface.bulkInsert('app_employees',
       [
         {
-          uuid: uuid.genUUID(),
+          uuid: /* uuid.genUUID() */'5804ba7c-3e47-46db-b5b8-9322f25533c3',
           name: crypt.encrypt('Jessica Aliane Ortiz'),
           phone: crypt.encrypt('+1 656 3225291'),
           status: true

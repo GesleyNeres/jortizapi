@@ -3,6 +3,7 @@ const database = require('../lib/database');
 const EmployeeModel = require('./employeeModel');
 const ClientModel = require('./clientModel');
 const ServiceModel = require('./serviceModel');
+const crypt = require('../utils/crypt')
 
 const PayslipModel = database.define('app_payslips',
   {
@@ -37,28 +38,27 @@ const PayslipModel = database.define('app_payslips',
       allowNull: false
     },
     service_billing: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
+      type: Sequelize.STRING,
       allowNull: false
     },
     employee_work_hours: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0,
-      allowNull: true
+      type: Sequelize.STRING,
+      defaultValue: '0',
+      allowNull: false
     },
     employee_salary_hours: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
-      allowNull: true
+      type: Sequelize.STRING,
+      defaultValue: '0',
+      allowNull: false
     },
     employee_service_percentage: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
-      allowNull: true
+      type: Sequelize.STRING,
+      defaultValue: '0',
+      allowNull: false
     },
     employee_discounts: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
+      type: Sequelize.STRING,
+      defaultValue: '0.00',
       allowNull: true
     },
     employee_discounts_description: {
@@ -67,34 +67,34 @@ const PayslipModel = database.define('app_payslips',
       defaultValue: ''
     },
     employee_miles_travelled: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
+      type: Sequelize.STRING,
+      defaultValue: '0.00',
       allowNull: true
     },
     employee_gas_price: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
+      type: Sequelize.STRING,
+      defaultValue: '0.00',
       allowNull: true
     },
     employee_car_efficiency: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
+      type: Sequelize.STRING,
+      defaultValue: '0.00',
       allowNull: true
     },
     employee_gains: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
+      type: Sequelize.STRING,
+      defaultValue: '0.00',
       allowNull: false
     },
     employer_gains: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
+      type: Sequelize.STRING,
+      defaultValue: '0.00',
       allowNull: false
     },
     employee_tips: {
-      type: Sequelize.FLOAT,
-      defaultValue: 0.00,
-      allowNull: false
+      type: Sequelize.STRING,
+      defaultValue: '0.00',
+      allowNull: true
     },
     status: {
       type: Sequelize.BOOLEAN,
@@ -156,17 +156,18 @@ ClientModel.hasMany(PayslipModel,
 )
 
 PayslipModel.beforeCreate(function (model) {
-  model.service_billing = crypt.encrypt(model.service_billing),
-  model.employee_work_hours = crypt.encrypt(model.employee_work_hours),
-  model.employee_salary_hours = crypt.encrypt(model.employee_salary_hours),
-  model.employee_discounts = crypt.encrypt(model.employee_discounts),
+  model.service_billing = crypt.encrypt(parseFloat(model.service_billing).toFixed(2)),
+  model.employee_work_hours = crypt.encrypt(parseFloat(model.employee_work_hours).toFixed(2)),
+  model.employee_salary_hours = crypt.encrypt(parseFloat(model.employee_salary_hours).toFixed(2)),
+  model.employee_discounts = crypt.encrypt(parseFloat(model.employee_discounts).toFixed(2)),
   model.employee_discounts_description = crypt.encrypt(model.employee_discounts_description),
-  model.employee_car_efficiency = crypt.encrypt(model.employee_car_efficiency),
-  model.employee_miles_travelled = crypt.encrypt(model.employee_miles_travelled),
-  model.employee_gas_price = crypt.encrypt(model.employee_gas_price),
-  model.employee_gains = crypt.encrypt(model.employee_gains),
-  model.employer_gains = crypt.encrypt(model.employer_gains),
-  model.employee_tips = crypt.encrypt(model.employee_tips)
+  model.employee_car_efficiency = crypt.encrypt(parseFloat(model.employee_car_efficiency).toFixed(2)),
+  model.employee_miles_travelled = crypt.encrypt(parseFloat(model.employee_miles_travelled).toFixed(2)),
+  model.employee_gas_price = crypt.encrypt(parseFloat(model.employee_gas_price).toFixed(2)),
+  model.employee_gains = crypt.encrypt(parseFloat(model.employee_gains).toFixed(2)),
+  model.employer_gains = crypt.encrypt(parseFloat(model.employer_gains).toFixed(2)),
+  model.employee_tips = crypt.encrypt(parseFloat(model.employee_tips).toFixed(2))
+  model.employee_service_percentage = crypt.encrypt(parseFloat(model.employee_service_percentage).toFixed(2))
 });
 
 module.exports = PayslipModel

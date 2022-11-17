@@ -34,7 +34,8 @@ const ClientModel = database.define('app_clients',
     },
     cost: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true,
+      defaultValue: '0.00'
     },
     total_revenue: {
       type: Sequelize.STRING,
@@ -47,7 +48,8 @@ const ClientModel = database.define('app_clients',
     },
     details: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true,
+      defaultValue: ''
     },
     status: {
       type: Sequelize.BOOLEAN,

@@ -48,7 +48,7 @@ exports.create = async (req, res, next) => {
             loggerusr.info(`Employee successfully created.`)
             return res.status(201).json(
                 {
-                    data: "Employee created."
+                    data: response.uuid
                 }
             )
         }

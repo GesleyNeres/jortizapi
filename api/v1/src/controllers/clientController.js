@@ -55,7 +55,7 @@ exports.create = async (req, res, next) => {
             loggerusr.info(`Client successfully created.`)
             return res.status(201).json(
                 {
-                    data: response.uuid,
+                    data: response.uuid
                 }
             )
         }

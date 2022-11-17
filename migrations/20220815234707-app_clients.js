@@ -18,23 +18,24 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      address:{
+      address: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      city:{
+      city: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      state:{
+      state: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      cost:{
+      cost: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
+        defaultValue: '0.00'
       },
-      total_revenue:{
+      total_revenue: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -43,9 +44,10 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      details:{
+      details: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
+        defaultValue: ''
       },
       status: {
         type: Sequelize.BOOLEAN,

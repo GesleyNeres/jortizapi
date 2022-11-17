@@ -13,20 +13,22 @@ exports.readAll = async (req, res, next) => {
 
         app_payslip[0].forEach(element => {
             element.client = crypt.decrypt(element.client)
-            element.service = crypt.decrypt(element.service)
             element.employee = crypt.decrypt(element.employee)
-            element.service_billing = crypt.decrypt(element.service_billing),
-            element.employee_work_hours= crypt.decrypt(element.employee_work_hours),
-            element.employee_salary_hours = crypt.decrypt(element.employee_salary_hours),
-            element.employee_discounts= crypt.decrypt(element.employee_discounts),
-            element.employee_discounts_description = crypt.decrypt(element.employee_discounts_description),
-            element.employee_car_efficiency = crypt.decrypt(element.employee_car_efficiency),
-            element.employee_miles_travelled = crypt.decrypt(element.employee_miles_travelled),
-            element.employee_gas_price = crypt.decrypt(element.employee_gas_price),
-            element.employee_gains = crypt.decrypt(element.employee_gains),
-            element.employer_gains = crypt.decrypt(element.employer_gains),
+            element.service = crypt.decrypt(element.service)
+            element.service_billing = crypt.decrypt(element.service_billing)
+            element.employee_work_hours = crypt.decrypt(element.employee_work_hours)
+            element.employee_salary_hours = crypt.decrypt(element.employee_salary_hours)
+            element.employee_discounts = crypt.decrypt(element.employee_discounts)
+            element.employee_miles_travelled = crypt.decrypt(element.employee_miles_travelled)
+            element.employee_gas_price = crypt.decrypt(element.employee_gas_price)
+            element.employee_car_efficiency = crypt.decrypt(element.employee_car_efficiency)
+            element.employee_discounts_description = crypt.decrypt(element.employee_discounts_description)
+            element.employer_gains = crypt.decrypt(element.employer_gains)
+            element.employee_gains = crypt.decrypt(element.employee_gains)
+            element.employee_service_percentage = crypt.decrypt(element.employee_service_percentage)
             element.employee_tips = crypt.decrypt(element.employee_tips)
         })
+
 
         if (app_payslip[0]) {
             loggerusr.info(`Payslips successfully loaded. | '${__filename}' | '${req.token}'`)
@@ -70,6 +72,19 @@ exports.readAllReport = async (req, res, next) => {
             app_payslip[0].forEach(element => {
                 element.client = crypt.decrypt(element.client)
                 element.employee = crypt.decrypt(element.employee)
+                element.service = crypt.decrypt(element.service)
+                element.service_billing = crypt.decrypt(element.service_billing)
+                element.employee_work_hours = crypt.decrypt(element.employee_work_hours)
+                element.employee_salary_hours = crypt.decrypt(element.employee_salary_hours)
+                element.employee_discounts = crypt.decrypt(element.employee_discounts)
+                element.employee_miles_travelled = crypt.decrypt(element.employee_miles_travelled)
+                element.employee_gas_price = crypt.decrypt(element.employee_gas_price)
+                element.employee_car_efficiency = crypt.decrypt(element.employee_car_efficiency)
+                element.employee_discounts_description = crypt.decrypt(element.employee_discounts_description)
+                element.employer_gains = crypt.decrypt(element.employer_gains)
+                element.employee_gains = crypt.decrypt(element.employee_gains)
+                element.employee_service_percentage = crypt.decrypt(element.employee_service_percentage)
+                element.employee_tips = crypt.decrypt(element.employee_tips)
             })
 
             app_payslip[0].forEach(element => {
@@ -106,7 +121,7 @@ exports.readAllReport = async (req, res, next) => {
 exports.create = async (req, res, next) => {
 
     try {
-        
+
         const payslip = req.body
 
         const response = await PayslipModel.create(payslip)
@@ -115,7 +130,7 @@ exports.create = async (req, res, next) => {
             loggerusr.info(`Payslip successfully created.`)
             return res.status(201).json(
                 {
-                    data: "Payslip created."
+                    data: response.uuid
                 }
             )
         }

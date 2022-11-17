@@ -5,13 +5,13 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('app_roles', [
       {
-        uuid: uuid.genUUID(),
+        uuid: /* uuid.genUUID() */'f2a078a3-8b2b-4a38-903f-ecec2422fcd6',
         name: 'app_usr_dft',
         description: 'Default user\'s roles.',
         status: true
       },
       {
-        uuid: uuid.genUUID(),
+        uuid: /* uuid.genUUID() */'f2a078a3-8b2b-4a38-903f-ecec2422fcd4',
         name: 'app_usr_adm',
         description: 'Admin user\'s roles.',
         status: true

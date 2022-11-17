@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('app_services', [
       {
-        uuid: uuid.genUUID(),
+        uuid: /* uuid.genUUID() */'0efa944b-78af-422a-a5f1-e3aca4521672',
         name: crypt.encrypt('Deep Clean'),
         description: crypt.encrypt('House deep clean.'),
         price: crypt.encrypt('450.00'),

@@ -10,8 +10,8 @@ module.exports = {
         uuid: uuid.genUUID(),
         name: crypt.encrypt('Gesley Neres'),
         email: 'neres.gesley@gmail.com',
-        password: crypt.hash('IhaAa!'),
-        role: 'bb6214f9-8c3b-4e31-bd97-5fccc72f6866',
+        password: crypt.hash('ech0@APP'),
+        role: 'f2a078a3-8b2b-4a38-903f-ecec2422fcd4',
         status: true
       }
     ], {});
