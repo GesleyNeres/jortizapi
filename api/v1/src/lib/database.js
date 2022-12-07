@@ -14,7 +14,7 @@ const database = new Sequelize(
     {
         host: process.env.APP_DATABASE_HOST,
         dialect: 'mysql',
-        /* logging: false */
+        logging: false
     }
 );
 
