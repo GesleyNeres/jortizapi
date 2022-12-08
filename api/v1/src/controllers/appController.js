@@ -15,6 +15,7 @@ exports.readAll = async (req, res, next) => {
         const count_payslips = await database.query(`select count(*) as payslips from vw_payslips`)
 
         loggerusr.info(`Application Metrics successfully loaded. | '${__filename}' | '${req.token}'`)
+        
         return res.status(200).json(
             {
                 data: {
