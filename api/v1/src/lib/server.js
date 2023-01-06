@@ -23,6 +23,15 @@ logger.info(`Server JSON started | '${__filename}'`)
 server.use(routes)
 logger.info(`Server ROUTES started | '${__filename}'`)
 
+server.all('*', (req, res, next)=>{
+    res.status(200).json({
+        application:"J Ortiz",
+        status: "Running",
+        version:"Beta Version v1.0",
+        message: "Welcome! This is a default message."
+    })
+})
+
 server.use(handler)
 logger.info(`Server ERROR HANDLER started | '${__filename}'`)
 

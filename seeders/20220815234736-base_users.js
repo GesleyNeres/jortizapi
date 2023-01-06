@@ -13,6 +13,14 @@ module.exports = {
         password: crypt.hash('ech0@APP'),
         role: 'f2a078a3-8b2b-4a38-903f-ecec2422fcd4',
         status: true
+      },
+      {
+        uuid: uuid.genUUID(),
+        name: crypt.encrypt('Jessica Ortiz'),
+        email: 'jessicaalianeortiz@gmail.com',
+        password: crypt.hash('Xp@h0@APP22ghH'),
+        role: 'f2a078a3-8b2b-4a38-903f-ecec2422fcd4',
+        status: true
       }
     ], {});
   },

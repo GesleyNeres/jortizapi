@@ -5,5 +5,4 @@ const auth = require('../../middlewares/auth')
 
 router.get('/application', auth, controller.readAll) 
 
-
 module.exports = router
